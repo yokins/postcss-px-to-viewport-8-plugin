@@ -14,6 +14,10 @@ export const createPxReplace = (
     const pixels = parseFloat($1);
     if (pixels <= opts.minPixelValue!) return m;
     const parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
+    if (opts.maxViewportWidth) {
+      const cappedPx = pixels * (opts.maxViewportWidth / size);
+      return `min(${vwValue}${unit}, ${cappedPx.toFixed(opts.unitPrecision)}px)`;
+    }
     return parsedVal === 0 ? '0' : `${parsedVal}${viewportUnit}`;
   };
 };
