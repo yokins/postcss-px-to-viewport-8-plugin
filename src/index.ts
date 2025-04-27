@@ -17,6 +17,7 @@ import postcss from 'postcss';
 const defaults: Required<Omit<OptionType, 'exclude' | 'include'>> = {
   unitToConvert: 'px',
   viewportWidth: 320,
+  maxViewportWidth: null,
   viewportHeight: 568, // not now used; TODO: need for different units and math for different properties
   unitPrecision: 5,
   viewportUnit: 'vw',
