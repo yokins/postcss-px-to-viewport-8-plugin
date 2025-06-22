@@ -14,9 +14,13 @@ export const createPxReplace = (
     const pixels = parseFloat($1);
     if (pixels <= opts.minPixelValue!) return m;
     const parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
+    // 如果设置了最大视口宽度（maxViewportWidth），则进行限制
     if (opts.maxViewportWidth) {
-      const cappedPx = pixels * (opts.maxViewportWidth / size);
-      return `min(${vwValue}${unit}, ${cappedPx.toFixed(opts.unitPrecision)}px)`;
+      // 计算最大宽度下的px值
+      const cappedPx = pixels * (opts.maxViewportWidth / viewportSize);
+
+      // 返回min()函数，限制最大宽度
+      return `min(${parsedVal}${viewportUnit}, ${cappedPx.toFixed(opts.unitPrecision!)}px)`;
     }
     return parsedVal === 0 ? '0' : `${parsedVal}${viewportUnit}`;
   };

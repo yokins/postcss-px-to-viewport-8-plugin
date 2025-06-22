@@ -14,6 +14,10 @@ export type OptionType = {
    */
   viewportWidth?: number | ((filePath: string) => number|undefined);
   /**
+   * 设计稿的视口最大宽度
+   */
+  maxViewportWidth?: number | null;
+  /**
    * 设计稿的视口高度
    */
   viewportHeight?: number; // not now used; TODO: need for different units and math for different properties
