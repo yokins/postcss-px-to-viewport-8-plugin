@@ -17,7 +17,7 @@ export const createPxReplace = (
     let parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
 
     if (opts.maxViewportWidth && viewportSize > opts.maxViewportWidth) {
-      parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
+      parsedVal = toFixed((pixels / opts.maxViewportWidth) * 100, opts.unitPrecision!);
     }
 
     return parsedVal === 0 ? '0' : `${parsedVal}${viewportUnit}`;
