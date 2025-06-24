@@ -20,7 +20,7 @@ export const createPxReplace = (
       parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
     }
 
-    return parsedVal === 0 ? '0' : parsedVal;
+    return parsedVal === 0 ? '0' : `${parsedVal}${viewportUnit}`;
   };
 };
 
