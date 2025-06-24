@@ -13,21 +13,14 @@ export const createPxReplace = (
     if (!$1) return m;
     const pixels = parseFloat($1);
     if (pixels <= opts.minPixelValue!) return m;
-    const parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
 
-    // 如果设置了最大视口宽度（maxViewportWidth）
-    if (opts.maxViewportWidth) {
-      // 获取当前屏幕宽度（一般为 window.innerWidth 或其他方式获取）
-      const currentViewportWidth = Math.min(window.innerWidth, opts.maxViewportWidth);
+    let parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
 
-      // 计算vw值，基于当前视口宽度
-      const vwValue = (pixels / currentViewportWidth) * 100;
-
-      // 返回min()函数，限制最大宽度
-      return `min(${toFixed(vwValue, opts.unitPrecision!)}${viewportUnit}, ${pixels * (opts.maxViewportWidth / viewportSize)}px)`;
+    if (opts.maxViewportWidth && viewportSize > opts.maxViewportWidth) {
+      parsedVal = toFixed((pixels / viewportSize) * 100, opts.unitPrecision!);
     }
 
-    return parsedVal === 0 ? '0' : `${parsedVal}${viewportUnit}`;
+    return parsedVal === 0 ? '0' : parsedVal;
   };
 };
 
